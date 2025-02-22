@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>107.4 | Seek Interference</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: 'IBM Plex Mono', monospace; font-weight: 400;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .terminal {
+            width: 90%;
+            max-width: 800px;
+            border: 2px solid lime;
+            padding: 20px;
+            text-align: left;
+            white-space: pre-wrap;
+            background: black;
+            height: 60vh;
+            overflow-y: auto;
+        }
+        input {
+            background: black;
+            border: none;
+            color: lime;
+            font-family: 'IBM Plex Mono', monospace; font-weight: 400;
+            font-size: 16px;
+            width: 100%;
+            outline: none;
+        }
+        .hidden {
+            display: none;
+        }
+        .nav {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header {
+            position: relative;
+            width: 100%;
+            color: lime;
+            background: black;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.05);
+            box-sizing: border-box;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            z-index: 12;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>-- 107.4 --</h1>
+    <p>INTERFERENCE AS A SIGNAL</p>
+    <div class="terminal" id="terminal">
+        ---. --- --- -.. / .-.. ..- -.-. -.- / -.-. .- .-. .-. .. . . ...
+        SIGNAL UPLINK: 107.4 MHz
+        TRACE SIGNAL: ███.███.███.███
+        _
+        <input type="text" id="userInput" autofocus placeholder="Enter command...">
+    </div>
+    
+    <div class="hidden" id="transmission">
+        <p>>> INTERCEPTED TRANSMISSION DETECTED.</p>
+        <p>>> AUDIO FILE ATTACHED: <a href="#" onclick="revealAudio()">[PLAY]</a></p>
+        <audio id="morseAudio" class="hidden" controls>
+            <source src="morsecode.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    
+    <script>
+        document.getElementById("userInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                let input = this.value.trim().toLowerCase();
+                let terminal = document.getElementById("terminal");
+                if (input === "trace") {
+                    document.getElementById("transmission").classList.remove("hidden");
+                    terminal.innerHTML += "<br>>> TRACE SIGNAL RECEIVED";
+                    terminal.innerHTML += "<br>>> lot47.studio";
+                } else {
+                    terminal.innerHTML += "<br>>> SIGNAL LOST. ATTEMPT AGAIN.";
+                }
+                this.value = "";
+            }
+        });
+
+        function revealAudio() {
+            document.getElementById("morseAudio").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
